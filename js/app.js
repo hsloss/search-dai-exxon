@@ -1,3 +1,4 @@
+
 let elTable = document.getElementById('see-also')
 let elForm = document.getElementById('select-country')
 let selectElement = document.getElementById('name-of-country')
@@ -36,6 +37,16 @@ let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish'
 
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
+let typed = input.value.toLocaleLowerCase()
+//let typed ='state_of_qatar'
+let displayFunc = function(){
+  let displayResults = countriesArray.filter(function(test){
+    console.log(test.countryName)
+    return test.countryName === typed
+    
+  })
+  return displayResults
+  
 let populateForm = function() {
   elForm.appendChild(selectElement)
   for (let i = 0; i < countriesArray.length; i++) {
@@ -81,8 +92,29 @@ let removeSeeAlso = function(){
   while (elTable.hasChildNodes()) {
     elTable.removeChild(elTable.firstChild)
   }
+
 }
+displayFunc()
+
+// let eLi = document.createElement('li')
+// eUl.appendChild(eLi)
+// eLi.innerText = displayResults
+
+
+
+
+//   if (countriesArray[i]===input){
+//     countriesArray[i]. =""
+//   } else{
+//     li[i].style.display ="none"
+//   }
+// }
+// console.log(displayArray)
+
+
+
 
 populateForm()
 selectDropDown()
 displaySeeAlso()
+
