@@ -40,11 +40,32 @@ countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, South
 
 let typed = input.value.toLocaleLowerCase()
 
+let clickHandler = function(){
+  for(let i = 0; i < countriesArray.length; i++){
+    if(input.value === countriesArray[i].countryName){
+      selectedCountry.push(countriesArray[i])
+      console.log(countriesArray[i])
+    }
+  }
+  removeSeeAlso()
+  for(let i = 0; i < countriesArray.length; i++){
+    let j=0
+    if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
+      let elRow = document.createElement('li')
+      elTable.appendChild(elRow)
+      elRow.innerText = countriesArray[i].countryName
+    }
+  }
+  selectedCountry = []
+}
+
+
+
 let displayFunc = function(){
   let displayResults = countriesArray.filter(function(test){
-    console.log(test.countryName)
     return test.countryName === typed
   })
+  console.log(displayResults)
   return displayResults
 }
 
@@ -57,46 +78,13 @@ let populateForm = function() {
   }
 }
 
-let selectDropDown = function(){
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelector('select[name="country"]').onchange=changeEventHandler
-  },false)
-  function changeEventHandler(event){
-    for(let i = 0; i < countriesArray.length; i++){
-      if(event.target.value === countriesArray[i].countryName){
-        selectedCountry.push(countriesArray[i])
-      }
-    }
-  }
-}
-
-let displaySeeAlso = function (){
-  elForm.addEventListener('change', function(event) {
-    event.preventDefault()
-    removeSeeAlso()
-    for(let i = 0; i < countriesArray.length; i++){
-      let j=0
-      if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
-        let elRow = document.createElement('li')
-        elTable.appendChild(elRow)
-        elRow.innerText = countriesArray[i].countryName
-        console.log(countriesArray[i].countryName)
-      }
-    }
-
-    selectedCountry = []
-  }
-  )
-}
-
 let removeSeeAlso = function(){
   while (elTable.hasChildNodes()) {
     elTable.removeChild(elTable.firstChild)
   }
-
 }
-displayFunc()
 
+input.addEventListener('change', clickHandler)
+displayFunc()
 populateForm()
-selectDropDown()
-displaySeeAlso()
+// displaySeeAlso()
