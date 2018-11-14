@@ -1,5 +1,6 @@
-let elTable = document.getElementById('see-also')
-
+let elTable = document.getElementById('seeAlso')
+let input= document.getElementById('search')
+let eUl = document.getElementById('myUL')
 let Countries = function(name, region, language, description, keywords){
   this.countryName = name
   this.countryRegion = region
@@ -9,6 +10,7 @@ let Countries = function(name, region, language, description, keywords){
 }
 
 let countriesArray = []
+//let displayResults =[]
 
 let Ethiopia  = new Countries('federal_republic_of_ethiopia','africa','amharic','Ethiopia, officially the Federal Democratic Republic of Ethiopia, is a country in the Horn of Africa. It shares borders with Eritrea to the north, Djibouti to the northeast, Somalia to the east, Sudan and South Sudan to the west, and Kenya to the south. With over 102 million inhabitants, Ethiopia is the most populous landlocked country in the world and the second-most populous nation on the African continent. It occupies a total area of 1,100,000 square kilometres (420,000 sq mi), and its capital and largest city is Addis Ababa.')
 let Egypt  = new Countries('arab_republic_of_egypt','africa','arabic','Egypt, officially the Arab Republic of Egypt, is a country spanning the northeast corner of Africa and southwest corner of Asia by a land bridge formed by the Sinai Peninsula. Egypt is a Mediterranean country bordered by the Gaza Strip and Israel to the northeast, the Gulf of Aqaba to the east, the Red Sea to the east and south, Sudan to the south, and Libya to the west. Across the Gulf of Aqaba lies Jordan, across the red sea lies Saudi Arabia, and across the Mediterranean lie Greece, Turkey and Cyprus, although none share a land border with Egypt.')
@@ -33,12 +35,65 @@ let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish'
 
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
-// find all instances where north_america = countriesArray.region and push to regionMatchArray
-for(let i = 0; i < countriesArray.length; i++){
-  if ('north_america' === countriesArray[i].countryRegion) {
-    let elRow = document.createElement('tr')
-    elTable.appendChild(elRow)
-    elRow.innertext = countriesArray[i].countryName
-  }
+// const result = countriesArray.filter(countriesArray => countriesArray.length > 6)
+
+// console.log(result)
+//console.log('hello')
+//git
+let typed = input.value.toLocaleLowerCase()
+//let typed ='state_of_qatar'
+let displayFunc = function(){
+  let displayResults = countriesArray.filter(function(test){
+    console.log(test.countryName)
+    return test.countryName === typed
+    
+  })
+  return displayResults
 }
+displayFunc()
+
+// let eLi = document.createElement('li')
+// eUl.appendChild(eLi)
+// eLi.innerText = displayResults
+
+
+
+
+//   if (countriesArray[i]===input){
+//     countriesArray[i]. =""
+//   } else{
+//     li[i].style.display ="none"
+//   }
+// }
+// console.log(displayArray)
+
+
+// // function searchResults(){
+// //let input, filter, table, tr, td, i
+
+//   filter.input.value.toLowerCase()
+//   table.document.getElementById('countries')
+//   tr = table.getElementByTagName('tr')
+//   for(i=0; i<countriesArray.length; i++){
+//     td= countriesArray[i].getElementByTagName('td')[0]
+//     if (td){
+//       if (td.innerHTML.toLowerCase().indexOf(filter) > -1){
+//         countriesArray[i].style.display =''
+//       }
+
+//     } else{
+//       countriesArray[i].style.display='none'
+
+//     }
+//   }
+// }
+// find all instances where north_america = countriesArray.region and push to  nhu7y6
+
+// for(let i = 0; i < countriesArray.length; i++){
+//   if ('north_america' === countriesArray[i].countryRegion) {
+//     let elRow = document.createElement('tr')
+//     elTable.appendChild(elRow)
+//     elRow.innertext = countriesArray[i].countryName
+//   }
+// }
 // print a list of table rows where countries.region = selected_country.region//
