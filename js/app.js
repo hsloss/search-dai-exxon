@@ -1,5 +1,6 @@
 let elTable = document.getElementById('see-also')
-let elBody = document.getElementById('body')
+let elForm = document.getElementById('select-country')
+let selectElement = document.getElementById('name-of-country')
 
 let Countries = function(name, region, language, description, keywords){
   this.countryName = name
@@ -10,6 +11,7 @@ let Countries = function(name, region, language, description, keywords){
 }
 
 let countriesArray = []
+let selectedCountry = []
 
 let Ethiopia  = new Countries('federal_republic_of_ethiopia','africa','amharic','Ethiopia, officially the Federal Democratic Republic of Ethiopia, is a country in the Horn of Africa. It shares borders with Eritrea to the north, Djibouti to the northeast, Somalia to the east, Sudan and South Sudan to the west, and Kenya to the south. With over 102 million inhabitants, Ethiopia is the most populous landlocked country in the world and the second-most populous nation on the African continent. It occupies a total area of 1,100,000 square kilometres (420,000 sq mi), and its capital and largest city is Addis Ababa.')
 let Egypt  = new Countries('arab_republic_of_egypt','africa','arabic','Egypt, officially the Arab Republic of Egypt, is a country spanning the northeast corner of Africa and southwest corner of Asia by a land bridge formed by the Sinai Peninsula. Egypt is a Mediterranean country bordered by the Gaza Strip and Israel to the northeast, the Gulf of Aqaba to the east, the Red Sea to the east and south, Sudan to the south, and Libya to the west. Across the Gulf of Aqaba lies Jordan, across the red sea lies Saudi Arabia, and across the Mediterranean lie Greece, Turkey and Cyprus, although none share a land border with Egypt.')
@@ -34,20 +36,53 @@ let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish'
 
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
-for(let i = 0; i < countriesArray.length; i++){
-  // insert variable for selectedCountry.region and selectedCountry.language once Simon completes it//
-  if ('europe' === countriesArray[i].countryRegion || 'arabic' === countriesArray[i].countryLanguage) {
-    let elRow = document.createElement('li')
-    elTable.appendChild(elRow)
-    let a = document.createElement('a')
-    a.textContent = countriesArray[i].countryName
-    //add eventListener that runs selectCountry function on click//
-    a.setAttribute('href', 'http://www.google.com')
-    elRow.appendChild(a)
-    console.log(countriesArray[i].countryName)
+let populateForm = function() {
+  elForm.appendChild(selectElement)
+  for (let i = 0; i < countriesArray.length; i++) {
+    let option = document.createElement('option')
+    selectElement.appendChild(option)
+    option.innerText = countriesArray[i].countryName
   }
 }
 
-let goBack = function() {
-  window.history.back()
+let selectDropDown = function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelector('select[name="country"]').onchange=changeEventHandler
+  },false)
+  function changeEventHandler(event){
+    for(let i = 0; i < countriesArray.length; i++){
+      if(event.target.value === countriesArray[i].countryName){
+        selectedCountry.push(countriesArray[i])
+      }
+    }
+  }
 }
+
+let displaySeeAlso = function (){
+  elForm.addEventListener('change', function(event) {
+    event.preventDefault()
+    removeSeeAlso()
+    for(let i = 0; i < countriesArray.length; i++){
+      let j=0
+      if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
+        let elRow = document.createElement('li')
+        elTable.appendChild(elRow)
+        elRow.innerText = countriesArray[i].countryName
+        console.log(countriesArray[i].countryName)
+      }
+    }
+
+    selectedCountry = []
+  }
+  )
+}
+
+let removeSeeAlso = function(){
+  while (elTable.hasChildNodes()) {
+    elTable.removeChild(elTable.firstChild)
+  }
+}
+
+populateForm()
+selectDropDown()
+displaySeeAlso()
