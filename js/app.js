@@ -34,8 +34,8 @@ let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish'
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
 // Adding Option tag
-let selectOption = function(){
 let selectElement= document.getElementById('selectcountry')
+let selectOption = function(){
 selectElement.innerHTML =""
 for(let i =0; i<countriesArray.length; i++){
   let opt = countriesArray[i].countryName
@@ -44,18 +44,40 @@ for(let i =0; i<countriesArray.length; i++){
 }
 selectOption()
 
+// linking the definition with select 
 
-// Adding definition popup 
-let selectDefinition = function(){
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelector('select[name="select-country"]').onchange=changeEventHandler
+},true)
+
+function changeEventHandler(event){
   for(let i=0; i<countriesArray.length; i++){
-    if (opt===countriesArray.countryName){
-      alert(countriesArray[Countries].description)
-    } else {
-      alert('select')
-    }
+    if(!this)alert('please select one')
+    else alert(countriesArray[i].country_description)  
   }
-
+  //countriesArray=[] 
 }
+
+
+
+
+// // Adding definition popup 
+// let eldescription = document.getElementById('description')
+// eldescription.innerHTML=""
+// //let selectDefinition = function(){
+//   for(let i=0; i<countriesArray.length; i++){
+//     if (selectElement===countriesArray.countryName){
+//       eldescription.innerText=(countriesArray[1].country_description)
+//     } else{
+//       break
+//     } 
+      
+//     }
+    
+  
+//}
+
+
 
 
 // for(let i = 0; i < countriesArray.length; i++){
