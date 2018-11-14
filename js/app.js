@@ -3,6 +3,7 @@ let elTable = document.getElementById('see-also')
 let elForm = document.getElementById('select-country')
 let selectElement = document.getElementById('output_variables')
 let input = document.getElementById('search')
+let paragraph = document.getElementById('definition')
 
 let Countries = function(name, region, language, description, keywords){
   this.countryName = name
@@ -41,10 +42,14 @@ countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, South
 let typed = input.value.toLocaleLowerCase()
 
 let clickHandler = function(){
+  removeDefinition()
   for(let i = 0; i < countriesArray.length; i++){
     if(input.value === countriesArray[i].countryName){
       selectedCountry.push(countriesArray[i])
       console.log(countriesArray[i])
+      let definition = document.createElement('p')
+      paragraph.appendChild(definition)
+      definition.innerText = countriesArray[i].countryDescription
     }
   }
   removeSeeAlso()
@@ -81,6 +86,12 @@ let populateForm = function() {
 let removeSeeAlso = function(){
   while (elTable.hasChildNodes()) {
     elTable.removeChild(elTable.firstChild)
+  }
+}
+
+let removeDefinition = function(){
+  while (paragraph.hasChildNodes()) {
+    paragraph.removeChild(paragraph.firstChild)
   }
 }
 
