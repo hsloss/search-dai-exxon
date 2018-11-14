@@ -33,12 +33,34 @@ let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish'
 
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
-// find all instances where north_america = countriesArray.region and push to regionMatchArray
-for(let i = 0; i < countriesArray.length; i++){
-  if ('north_america' === countriesArray[i].countryRegion) {
-    let elRow = document.createElement('tr')
-    elTable.appendChild(elRow)
-    elRow.innertext = countriesArray[i].countryName
-  }
+// Adding Option tag
+let selectOption = function(){
+let selectElement= document.getElementById('selectcountry')
+selectElement.innerHTML =""
+for(let i =0; i<countriesArray.length; i++){
+  let opt = countriesArray[i].countryName
+  selectElement.innerHTML+="<option value=\"" + opt +"\">"+ opt + "</option>"
 }
-// print a list of table rows where countries.region = selected_country.region//
+}
+selectOption()
+
+
+// Adding definition popup 
+let selectDefinition = function(){
+  for(let i=0; i<countriesArray.length; i++){
+    if (opt===countriesArray.countryName){
+      alert(countriesArray[Countries].description)
+    } else {
+      alert('select')
+    }
+  }
+
+}
+
+
+// for(let i = 0; i < countriesArray.length; i++){
+//   if ('north_america' === countriesArray[i].countryRegion) {
+//     let elRow = document.createElement('tr')
+//     elTable.appendChild(elRow)
+//     elRow.innertext = countriesArray[i].countryName
+//   }
