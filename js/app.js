@@ -1,16 +1,18 @@
-let elTable = document.getElementById('seeAlso')
-let input= document.getElementById('search')
-let eUl = document.getElementById('myUL')
+
+let elTable = document.getElementById('see-also')
+let elForm = document.getElementById('select-country')
+let selectElement = document.getElementById('name-of-country')
+
 let Countries = function(name, region, language, description, keywords){
   this.countryName = name
   this.countryRegion = region
-  this.country_language = language
-  this.country_description = description
-  this.country_keywords = keywords
+  this.countryLanguage = language
+  this.countryDescription = description
+  this.countryKeywords = keywords
 }
 
 let countriesArray = []
-//let displayResults =[]
+let selectedCountry = []
 
 let Ethiopia  = new Countries('federal_republic_of_ethiopia','africa','amharic','Ethiopia, officially the Federal Democratic Republic of Ethiopia, is a country in the Horn of Africa. It shares borders with Eritrea to the north, Djibouti to the northeast, Somalia to the east, Sudan and South Sudan to the west, and Kenya to the south. With over 102 million inhabitants, Ethiopia is the most populous landlocked country in the world and the second-most populous nation on the African continent. It occupies a total area of 1,100,000 square kilometres (420,000 sq mi), and its capital and largest city is Addis Ababa.')
 let Egypt  = new Countries('arab_republic_of_egypt','africa','arabic','Egypt, officially the Arab Republic of Egypt, is a country spanning the northeast corner of Africa and southwest corner of Asia by a land bridge formed by the Sinai Peninsula. Egypt is a Mediterranean country bordered by the Gaza Strip and Israel to the northeast, the Gulf of Aqaba to the east, the Red Sea to the east and south, Sudan to the south, and Libya to the west. Across the Gulf of Aqaba lies Jordan, across the red sea lies Saudi Arabia, and across the Mediterranean lie Greece, Turkey and Cyprus, although none share a land border with Egypt.')
@@ -30,16 +32,11 @@ let SaudiArabia  = new Countries('kingdom_of_saudi_arabia','middle_east','arabic
 let Oman  = new Countries('sultanate_of_oman','middle_east','arabic','Oman, officially the Sultanate of Oman, is an Arab country on the southeastern coast of the Arabian Peninsula in Western Asia. Its official religion is Islam. Holding a strategically important position at the mouth of the Persian Gulf, the country shares land borders with the United Arab Emirates to the northwest, Saudi Arabia to the west, and Yemen to the southwest, and shares marine borders with Iran and Pakistan. The coast is formed by the Arabian Sea on the southeast and the Gulf of Oman on the northeast. The Madha and Musandam exclaves are surrounded by the UAE on their land borders, with the Strait of Hormuz (which it shares with Iran) and Gulf of Oman forming Musandam\'s coastal boundaries.')
 let Bahrain  = new Countries('kingdom_of_bahrain','middle_east','arabic','Bahrain, officially the Kingdom of Bahrain, is an island country in the Persian Gulf. The sovereign state comprises a small archipelago centered around Bahrain Island, situated between the Qatar peninsula and the north eastern coast of Saudi Arabia, to which it is connected by the 25-kilometre (16 mi) King Fahd Causeway. Bahrain\'s population is 1,234,571 (c. 2010), including 666,172 non-nationals. It is 765.3 square kilometres (295.5 sq mi) in size, making it the third-smallest nation in Asia after the Maldives and Singapore.')
 let Qatar  = new Countries('state_of_qatar','middle_east','arabic','Qatar, officially the State of Qatar, is a country located in Western Asia, occupying the small Qatar Peninsula on the northeastern coast of the Arabian Peninsula. Whether the sovereign state should be regarded as a constitutional or an absolute monarchy is disputed. Its sole land border is with neighboring Gulf Cooperation Council (GCC) monarchy Saudi Arabia to the south, with the rest of its territory surrounded by the Persian Gulf. An arm of the Persian Gulf separates Qatar from the nearby Bahrain.')
-let USA  = new Countries('united_states_of_america','north_america','english','The United States of America (USA), commonly known as the United States (U.S. or US) or America, is a country composed of 50 states, a federal district, five major self-governing territories, and various possessions. At 3.8 million square miles (9.8 million km2), the United States is the world\'s third- or fourth-largest country by total area and slightly smaller than the entire continent of Europe\'s 3.9 million square miles (10.1 million km2). With a population of over 325 million people, the U.S. is the third most populous country. The capital is Washington, D.C., and the largest city by population is New York City. Forty-eight states and the capital\'s federal district are contiguous in North America between Canada and Mexico. The State of Alaska is in the northwest corner of North America, bordered by Canada to the east and across the Bering Strait from Russia to the west. The State of Hawaii is an archipelago in the mid-Pacific Ocean. The U.S. territories are scattered about the Pacific Ocean and the Caribbean Sea, stretching across nine official time zones. The extremely diverse geography, climate, and wildlife of the United States make it one of the world\'\s 17 megadiverse countries.')
+let USA  = new Countries('united_states_of_america','north_america','english','The United States of America (USA), commonly known as the United States (U.S. or US) or America, is a country composed of 50 states, a federal district, five major self-governing territories, and various possessions. At 3.8 million square miles (9.8 million km2), the United States is the world\'s third- or fourth-largest country by total area and slightly smaller than the entire continent of Europe\'s 3.9 million square miles (10.1 million km2). With a population of over 325 million people, the U.S. is the third most populous country. The capital is Washington, D.C., and the largest city by population is New York City. Forty-eight states and the capital\'s federal district are contiguous in North America between Canada and Mexico. The State of Alaska is in the northwest corner of North America, bordered by Canada to the east and across the Bering Strait from Russia to the west. The State of Hawaii is an archipelago in the mid-Pacific Ocean. The U.S. territories are scattered about the Pacific Ocean and the Caribbean Sea, stretching across nine official time zones. The extremely diverse geography, climate, and wildlife of the United States make it one of the world\'s 17 megadiverse countries.')
 let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish','Guatemala, officially the Republic of Guatemala, is a country in Central America bordered by Mexico to the north and west, Belize and the Caribbean to the northeast, Honduras to the east, El Salvador to the southeast and the Pacific Ocean to the south. With an estimated population of around 16.6 million, it is the most populated country in Central America. Guatemala is a representative democracy; its capital and largest city is Nueva Guatemala de la Asunción, also known as Guatemala City.')
 
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
-// const result = countriesArray.filter(countriesArray => countriesArray.length > 6)
-
-// console.log(result)
-//console.log('hello')
-//git
 let typed = input.value.toLocaleLowerCase()
 //let typed ='state_of_qatar'
 let displayFunc = function(){
@@ -49,6 +46,53 @@ let displayFunc = function(){
     
   })
   return displayResults
+  
+let populateForm = function() {
+  elForm.appendChild(selectElement)
+  for (let i = 0; i < countriesArray.length; i++) {
+    let option = document.createElement('option')
+    selectElement.appendChild(option)
+    option.innerText = countriesArray[i].countryName
+  }
+}
+
+let selectDropDown = function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelector('select[name="country"]').onchange=changeEventHandler
+  },false)
+  function changeEventHandler(event){
+    for(let i = 0; i < countriesArray.length; i++){
+      if(event.target.value === countriesArray[i].countryName){
+        selectedCountry.push(countriesArray[i])
+      }
+    }
+  }
+}
+
+let displaySeeAlso = function (){
+  elForm.addEventListener('change', function(event) {
+    event.preventDefault()
+    removeSeeAlso()
+    for(let i = 0; i < countriesArray.length; i++){
+      let j=0
+      if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
+        let elRow = document.createElement('li')
+        elTable.appendChild(elRow)
+        elRow.innerText = countriesArray[i].countryName
+        console.log(countriesArray[i].countryName)
+      }
+    }
+
+    selectedCountry = []
+  }
+  )
+}
+
+let removeSeeAlso = function(){
+  while (elTable.hasChildNodes()) {
+    elTable.removeChild(elTable.firstChild)
+  }
+
 }
 displayFunc()
 
@@ -68,32 +112,9 @@ displayFunc()
 // console.log(displayArray)
 
 
-// // function searchResults(){
-// //let input, filter, table, tr, td, i
 
-//   filter.input.value.toLowerCase()
-//   table.document.getElementById('countries')
-//   tr = table.getElementByTagName('tr')
-//   for(i=0; i<countriesArray.length; i++){
-//     td= countriesArray[i].getElementByTagName('td')[0]
-//     if (td){
-//       if (td.innerHTML.toLowerCase().indexOf(filter) > -1){
-//         countriesArray[i].style.display =''
-//       }
 
-//     } else{
-//       countriesArray[i].style.display='none'
+populateForm()
+selectDropDown()
+displaySeeAlso()
 
-//     }
-//   }
-// }
-// find all instances where north_america = countriesArray.region and push to  nhu7y6
-
-// for(let i = 0; i < countriesArray.length; i++){
-//   if ('north_america' === countriesArray[i].countryRegion) {
-//     let elRow = document.createElement('tr')
-//     elTable.appendChild(elRow)
-//     elRow.innertext = countriesArray[i].countryName
-//   }
-// }
-// print a list of table rows where countries.region = selected_country.region//
