@@ -54,11 +54,16 @@ let clickHandler = function(){
   }
   removeSeeAlso()
   for(let i = 0; i < countriesArray.length; i++){
-    let j=0
-    if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
-      let elRow = document.createElement('li')
-      elTable.appendChild(elRow)
-      elRow.innerText = countriesArray[i].countryName
+    let countryNameString = countriesArray[i].countryName.split('_')
+    console.log(countryNameString)
+    let inputValueSplit = input.value.split('_')
+    for(let j = 0; j < inputValueSplit.length; j++) {
+      if (countryNameString.includes(inputValueSplit[j]) && inputValueSplit[j] !== 'of') {
+        let elRow = document.createElement('li')
+        elTable.appendChild(elRow)
+        elRow.innerText = countriesArray[i].countryName
+        break
+      }
     }
   }
   selectedCountry = []
