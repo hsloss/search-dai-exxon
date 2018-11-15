@@ -1,7 +1,9 @@
 
 let elTable = document.getElementById('see-also')
 let elForm = document.getElementById('select-country')
-let selectElement = document.getElementById('name-of-country')
+let selectElement = document.getElementById('output_variables')
+let input = document.getElementById('search')
+let paragraph = document.getElementById('definition')
 
 let Countries = function(name, region, language, description, keywords){
   this.countryName = name
@@ -24,7 +26,7 @@ let SouthAfrica  = new Countries('republic_of_south_africa','africa','zulu, xhos
 let Bhutan  = new Countries('kingdom_of_bhutan','asia','dzongkha','Bhutan, officially the Kingdom of Bhutan, is a landlocked country in South Asia. Located in the Eastern Himalayas, it is bordered by Tibet Autonomous Region of China in the north, the Sikkim state of India and the Chumbi Valley of Tibet in the west, the Arunachal Pradesh state of India in the east, and the states of Assam and West Bengal in the south. Bhutan is geopolitically in South Asia and is the region\'s second least populous nation after the Maldives. Thimphu is its capital and largest city, while Phuntsholing is its financial center.')
 let Korea  = new Countries('democratic_republic_of_korea','asia','korean','South Korea, officially the Republic of Korea (ROK), is a country in East Asia, constituting the southern part of the Korean Peninsula and lying to the east of the Asian mainland. The name Korea is derived from Goguryeo which was one of the great powers in East Asia during its time, ruling most of the Korean Peninsula, Manchuria, parts of the Russian Far East and Inner Mongolia, under Gwanggaeto the Great. South Korea lies in the north temperate zone and has a predominantly mountainous terrain. It comprises an estimated 51.4 million residents distributed over 100,363 km2 (38,750 sq mi). The capital and largest city is Seoul, with a population of 10 million.')
 let Russia  = new Countries('russian_federation','asia','russian','Russia, officially the Russian Federation, is a country in Eurasia. At 17,125,200 square kilometres (6,612,100 sq mi),[14] Russia is the largest country in the world by area, covering more than one-eighth of the Earth\'s inhabited land area, and the ninth most populous, with about 144.5 million people as of 2018, excluding Crimea. About 77% of the population live in the western, European part of the country. Russia\'s capital, Moscow, is the largest metropolitan area in Europe proper and one of the largest cities in the world; other major cities include Saint Petersburg, Novosibirsk, Yekaterinburg and Nizhny Novgorod. Extending across the entirety of Northern Asia and much of Eastern Europe, Russia spans eleven time zones and incorporates a wide range of environments and landforms. From northwest to southeast, Russia shares land borders with Norway, Finland, Estonia, Latvia, Lithuania and Poland (both with Kaliningrad Oblast), Belarus, Ukraine, Georgia, Azerbaijan, Kazakhstan, China, Mongolia and North Korea. It shares maritime borders with Japan by the Sea of Okhotsk and the U.S. state of Alaska across the Bering Strait.')
-let Netherlands  = new Countries('kingom_of_the_netherlands','europe','dutch','The Netherlands is a country located mainly in Northwestern Europe. Together with three island territories in the Caribbean (Bonaire, Sint Eustatius and Saba), it forms a constituent country of the Kingdom of the Netherlands. The European portion of the Netherlands consists of twelve provinces and borders Germany to the east, Belgium to the south, and the North Sea to the northwest, sharing maritime borders in the North Sea with Belgium, the United Kingdom, and Germany. The five largest cities in the Netherlands are Amsterdam, Rotterdam, The Hague, Utrecht (forming the Randstad megalopolis) and Eindhoven (leading the Brabantse Stedenrij). Amsterdam is the country\'s capital, while The Hague holds the seat of the States General, Cabinet and Supreme Court. The Port of Rotterdam is the largest port in Europe and the world\'\s largest outside Asia.')
+let Netherlands  = new Countries('kingom_of_the_netherlands','europe','dutch','The Netherlands is a country located mainly in Northwestern Europe. Together with three island territories in the Caribbean (Bonaire, Sint Eustatius and Saba), it forms a constituent country of the Kingdom of the Netherlands. The European portion of the Netherlands consists of twelve provinces and borders Germany to the east, Belgium to the south, and the North Sea to the northwest, sharing maritime borders in the North Sea with Belgium, the United Kingdom, and Germany. The five largest cities in the Netherlands are Amsterdam, Rotterdam, The Hague, Utrecht (forming the Randstad megalopolis) and Eindhoven (leading the Brabantse Stedenrij). Amsterdam is the country\'s capital, while The Hague holds the seat of the States General, Cabinet and Supreme Court. The Port of Rotterdam is the largest port in Europe and the world\'s largest outside Asia.')
 let UK  = new Countries('united_kingdom','europe','english','The United Kingdom of Great Britain and Northern Ireland, commonly known as the United Kingdom (UK) or Britain, is a sovereign country lying off the north-western coast of the European mainland. The United Kingdom includes the island of Great Britain, the north-eastern part of the island of Ireland and many smaller islands.Northern Ireland is the only part of the United Kingdom that shares a land border with another sovereign state‍—‌the Republic of Ireland. Apart from this land border, the United Kingdom is surrounded by the Atlantic Ocean, with the North Sea to its east, the English Channel to its south and the Celtic Sea to its south-south-west, giving it the 12th-longest coastline in the world. The Irish Sea lies between Great Britain and Ireland. With an area of 242,500 square kilometres (93,600 sq mi), the United Kingdom is the 78th-largest sovereign state in the world. It is also the 22nd-most populous country, with an estimated 66.0 million inhabitants in 2017.')
 let Germany  = new Countries('federal_republic_of_germany','europe','german','Germany, officially the Federal Republic of Germany, is a country in Central and Western Europe, lying between the Baltic and North seas to the north, and the Alps to the south. It borders Denmark to the north, Poland and the Czech Republic to the east, Austria and Switzerland to the south, and France, Luxembourg, Belgium and the Netherlands to the west. Germany includes 16 constituent states, covers an area of 357,386 square kilometres (137,988 sq mi), and has a largely temperate seasonal climate. With nearly 83 million inhabitants, it is the second most populous state of Europe after Russia, the most populous state lying entirely in Europe, as well as the most populous member state of the European Union. Germany\'s capital and largest metropolis is Berlin, while its largest conurbation is the Ruhr, with its main centres of Dortmund and Essen. The country\'s other major cities are Hamburg, Munich, Cologne, Frankfurt, Stuttgart, Düsseldorf, Leipzig, Bremen, Dresden, Hannover, and Nuremberg.')
 let UAE  = new Countries('united_arab_emirates','middle_east','arabic','The United Arab Emirates, sometimes simply called the Emirates, is a country in Western Asia at the southeast end of the Arabian Peninsula on the Persian Gulf, bordering Oman to the east and Saudi Arabia to the south, as well as sharing maritime borders with Qatar to the west and Iran to the north. The sovereign absolute monarchy is a federation of seven emirates consisting of Abu Dhabi (which serves as the capital), Ajman, Dubai, Fujairah, Ras al-Khaimah, Sharjah and Umm al-Quwain. Each emirate is governed by a ruler; together, they jointly form the Federal Supreme Council. One of the rulers serves as the President of the United Arab Emirates. In 2013, the UAE\'s population was 9.2 million, of which 1.4 million are Emirati citizens and 7.8 million are expatriates.')
@@ -38,15 +40,40 @@ let Guatemala  = new Countries('republic_of_guatemala','north_america','spanish'
 countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
 
 let typed = input.value.toLocaleLowerCase()
-//let typed ='state_of_qatar'
+
+let clickHandler = function(){
+  removeDefinition()
+  for(let i = 0; i < countriesArray.length; i++){
+    if(input.value === countriesArray[i].countryName){
+      selectedCountry.push(countriesArray[i])
+      console.log(countriesArray[i])
+      let definition = document.createElement('p')
+      paragraph.appendChild(definition)
+      definition.innerText = countriesArray[i].countryDescription
+    }
+  }
+  removeSeeAlso()
+  for(let i = 0; i < countriesArray.length; i++){
+    let j=0
+    if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
+      let elRow = document.createElement('li')
+      elTable.appendChild(elRow)
+      elRow.innerText = countriesArray[i].countryName
+    }
+  }
+  selectedCountry = []
+}
+
+
+
 let displayFunc = function(){
   let displayResults = countriesArray.filter(function(test){
-    console.log(test.countryName)
     return test.countryName === typed
-    
   })
+  console.log(displayResults)
   return displayResults
-  
+}
+
 let populateForm = function() {
   elForm.appendChild(selectElement)
   for (let i = 0; i < countriesArray.length; i++) {
@@ -56,65 +83,19 @@ let populateForm = function() {
   }
 }
 
-let selectDropDown = function(){
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelector('select[name="country"]').onchange=changeEventHandler
-  },false)
-  function changeEventHandler(event){
-    for(let i = 0; i < countriesArray.length; i++){
-      if(event.target.value === countriesArray[i].countryName){
-        selectedCountry.push(countriesArray[i])
-      }
-    }
-  }
-}
-
-let displaySeeAlso = function (){
-  elForm.addEventListener('change', function(event) {
-    event.preventDefault()
-    removeSeeAlso()
-    for(let i = 0; i < countriesArray.length; i++){
-      let j=0
-      if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
-        let elRow = document.createElement('li')
-        elTable.appendChild(elRow)
-        elRow.innerText = countriesArray[i].countryName
-        console.log(countriesArray[i].countryName)
-      }
-    }
-
-    selectedCountry = []
-  }
-  )
-}
-
 let removeSeeAlso = function(){
   while (elTable.hasChildNodes()) {
     elTable.removeChild(elTable.firstChild)
   }
-
 }
+
+let removeDefinition = function(){
+  while (paragraph.hasChildNodes()) {
+    paragraph.removeChild(paragraph.firstChild)
+  }
+}
+
+input.addEventListener('change', clickHandler)
 displayFunc()
-
-// let eLi = document.createElement('li')
-// eUl.appendChild(eLi)
-// eLi.innerText = displayResults
-
-
-
-
-//   if (countriesArray[i]===input){
-//     countriesArray[i]. =""
-//   } else{
-//     li[i].style.display ="none"
-//   }
-// }
-// console.log(displayArray)
-
-
-
-
 populateForm()
-selectDropDown()
-displaySeeAlso()
-
+// displaySeeAlso()
