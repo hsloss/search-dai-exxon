@@ -46,7 +46,6 @@ let clickHandler = function(){
   for(let i = 0; i < countriesArray.length; i++){
     if(input.value === countriesArray[i].countryName){
       selectedCountry.push(countriesArray[i])
-      console.log(countriesArray[i])
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
       definition.innerText = countriesArray[i].countryDescription
@@ -55,13 +54,14 @@ let clickHandler = function(){
   removeSeeAlso()
   for(let i = 0; i < countriesArray.length; i++){
     let countryNameString = countriesArray[i].countryName.split('_')
-    console.log(countryNameString)
     let inputValueSplit = input.value.split('_')
     for(let j = 0; j < inputValueSplit.length; j++) {
       if (countryNameString.includes(inputValueSplit[j]) && inputValueSplit[j] !== 'of') {
         let elRow = document.createElement('li')
         elTable.appendChild(elRow)
         elRow.innerText = countriesArray[i].countryName
+        elRow.setAttribute('id', countriesArray[i].countryName)
+        elRow.addEventListener('click', clickHandlerSeeAlso)
         break
       }
     }
@@ -69,13 +69,10 @@ let clickHandler = function(){
   selectedCountry = []
 }
 
-
-
 let displayFunc = function(){
   let displayResults = countriesArray.filter(function(test){
     return test.countryName === typed
   })
-  console.log(displayResults)
   return displayResults
 }
 
@@ -100,7 +97,11 @@ let removeDefinition = function(){
   }
 }
 
+let clickHandlerSeeAlso = function(){
+  input.value = event.target.id
+  clickHandler()
+}
+
 input.addEventListener('change', clickHandler)
 displayFunc()
 populateForm()
-// displaySeeAlso()
