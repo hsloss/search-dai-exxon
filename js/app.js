@@ -1,87 +1,74 @@
-
-
-let elTable = document.getElementById('see-also')
-let elForm = document.getElementById('select-country')
+let elList = document.getElementById('see-also')
+let elForm = document.getElementById('select-variable')
 let selectElement = document.getElementById('output_variables')
 let input = document.getElementById('search')
 let paragraph = document.getElementById('definition')
 
-function loadJSON(callback) {
-  var xobj = new XMLHttpRequest()
-  xobj.overrideMimeType('application/json')
-  xobj.open('GET', '../JSON/lcomvars.json', true)
-  xobj.onreadystatechange = function () {
-    if (xobj.readyState == 4 && xobj.status == '200') {
-      callback(xobj.responseText)
-    }
-  }
-  xobj.send(null)
+let variablesArray = []
+
+$.getJSON('https://raw.githubusercontent.com/hsloss/search-countries/newNamesForVariables/JSON/lcomvars.json', response => {
+  response.data.forEach((val) => {
+    let newVar = new Variables(val.name, val.sample_value, val.primary_definition)
+    variablesArray.push(newVar)
+  })
+})
+
+let Variables = function(name, value, definition){
+  this.name = name
+  this.sample_val = value
+  this.primary_definition = definition
 }
-
-loadJSON()
-
-let Countries = function(name, region, language, description, keywords){
-  this.countryName = name
-  this.countryRegion = region
-  this.countryLanguage = language
-  this.countryDescription = description
-  this.countryKeywords = keywords
-}
-
-let countriesArray = []
-let selectedCountry = []
-
-countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, SouthAfrica, Bhutan, Korea, Russia, Netherlands, UK, Germany, UAE, SaudiArabia, Oman, Bahrain, Qatar, USA, Guatemala)
+let selectedVariable = []
 
 let typed = input.value.toLocaleLowerCase()
 
 let clickHandler = function(){
   removeDefinition()
-  for(let i = 0; i < countriesArray.length; i++){
-    if(input.value === countriesArray[i].countryName){
-      selectedCountry.push(countriesArray[i])
+  for(let i = 0; i < variablesArray.length; i++){
+    if(input.value === variablesArray[i].name){
+      selectedVariable.push(variablesArray[i])
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
-      definition.innerText = countriesArray[i].countryDescription
+      definition.innerText = variablesArray[i].primary_definition
     }
   }
   removeSeeAlso()
-  for(let i = 0; i < countriesArray.length; i++){
-    let countryNameString = countriesArray[i].countryName.split('_')
+  for(let i = 0; i < variablesArray.length; i++){
+    let nameString = variablesArray[i].name.split('_')
     let inputValueSplit = input.value.split('_')
     for(let j = 0; j < inputValueSplit.length; j++) {
-      if (countryNameString.includes(inputValueSplit[j]) && inputValueSplit[j] !== 'of') {
-        let elRow = document.createElement('li')
-        elTable.appendChild(elRow)
-        elRow.innerText = countriesArray[i].countryName
-        elRow.setAttribute('id', countriesArray[i].countryName)
-        elRow.addEventListener('click', clickHandlerSeeAlso)
+      if (nameString.includes(inputValueSplit[j]) && inputValueSplit[j] !== 'of') {
+        let elLI = document.createElement('li')
+        elList.appendChild(elLI)
+        elLI.innerText = variablesArray[i].name
+        elLI.setAttribute('id', variablesArray[i].name)
+        elLI.addEventListener('click', clickHandlerSeeAlso)
         break
       }
     }
   }
-  selectedCountry = []
+  selectedVariable = []
 }
 
 let displayFunc = function(){
-  let displayResults = countriesArray.filter(function(test){
-    return test.countryName === typed
+  let displayResults = variablesArray.filter(function(test){
+    return test.name === typed
   })
   return displayResults
 }
 
 let populateForm = function() {
   elForm.appendChild(selectElement)
-  for (let i = 0; i < countriesArray.length; i++) {
+  for (let i = 0; i < variablesArray.length; i++) {
     let option = document.createElement('option')
     selectElement.appendChild(option)
-    option.innerText = countriesArray[i].countryName
+    option.innerText = variablesArray[i].name
   }
 }
 
 let removeSeeAlso = function(){
-  while (elTable.hasChildNodes()) {
-    elTable.removeChild(elTable.firstChild)
+  while (elList.hasChildNodes()) {
+    elList.removeChild(elList.firstChild)
   }
 }
 
