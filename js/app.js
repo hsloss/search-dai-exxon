@@ -50,7 +50,7 @@ let clickHandler = function(){
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
       definition.innerText = countriesArray[i].countryDescription
-    }
+    } 
   }
   removeSeeAlso()
   for(let i = 0; i < countriesArray.length; i++){
