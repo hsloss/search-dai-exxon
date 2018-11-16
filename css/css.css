@@ -44,6 +44,7 @@
     }
 }
 
+
 ol{
   font-family: 'PT Serif', serif;
   font-size: 1em;
@@ -68,7 +69,7 @@ h3{
 	font-family: 'PT Serif', serif; 
 }
 p{
-	text-align: center;
+
 	font-size: 25px;
 }
 h1{
@@ -84,4 +85,9 @@ input{
 #search{
 	align-content: center;
 	align-self: center;
+}
+img{
+	align-content: center;
+	width: 60px;
+	height: 40px;
 }
