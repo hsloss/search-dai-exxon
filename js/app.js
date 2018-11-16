@@ -46,12 +46,18 @@ let clickHandler = function(){
   for(let i = 0; i < countriesArray.length; i++){
     if(input.value === countriesArray[i].countryName){
       selectedCountry.push(countriesArray[i])
+      let ehead = document.createElement('h2')
+      paragraph.appendChild(ehead)
+      ehead.innerText= countriesArray[i].countryName
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
       definition.innerText = countriesArray[i].countryDescription
     }
   }
   removeSeeAlso()
+  let ehead2 = document.createElement('h3')
+  paragraph.appendChild(ehead2)
+  ehead2.innerText= 'See also'
   for(let i = 0; i < countriesArray.length; i++){
     let countryNameString = countriesArray[i].countryName.split('_')
     let inputValueSplit = input.value.split('_')
