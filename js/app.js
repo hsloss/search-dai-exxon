@@ -32,9 +32,11 @@ $.getJSON('https://raw.githubusercontent.com/hsloss/search-countries/newNamesFor
 
 let clickHandler = function(){variablesArray
   removeDefinition()
+
   for(let i = 0; i < variablesArray.length; i++){
     if(input.value === variablesArray[i].variablesName){
       selectedCountry.push(variablesArray[i])
+
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
       if(variablesArray[i].variablesDefinition === ''){
@@ -45,8 +47,10 @@ let clickHandler = function(){variablesArray
     }
   }
   removeSeeAlso()
+
   for(let i = 0; i < variablesArray.length; i++){
     let variablesNameString = variablesArray[i].variablesName.split('_')
+
     let inputValueSplit = input.value.split('_')
     for(let j = 0; j < inputValueSplit.length; j++) {
       if (variablesNameString.includes(inputValueSplit[j]) && inputValueSplit[j] !== 'of') {
