@@ -6,13 +6,37 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="css/css.css" />
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 </head>
-<body>
-  <table id='see-also'>
-      <th>See also</th>
-  </table>
 
-<p>hello world</p>
+<body id='body'>
+    <img src="logo.png" >
+  <h1>Data Definition Explorer
+</h1>
+
+    <section class="searchClass">
+        <div>
+
+            <form id="select-variable" action="" method="" >
+              <input onfocus="this.value=''" id="search" placeholder="Search" list="output_variables" type="search">
+              
+
+                  <datalist id="output_variables" name='output_variables' onkeydown='displayFunc()'></datalist>
+            </form>
+        </div>
+      </section>
+  <div id=definition></div>    
+  <br>
+  <ol id='see-also' a href=#>
+    <th>
+
+    </th>
+  </ol>
+  
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script src="js/app.js"></script>
 </html>
