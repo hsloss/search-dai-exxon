@@ -28,6 +28,8 @@ $.getJSON('https://raw.githubusercontent.com/hsloss/search-countries/newNamesFor
 }).then(function(res){
   displayFunc()
   populateForm()
+  variablesNamesArrayFunc()
+  variablesValuesArrayFunc()
 })
 
 let clickHandler = function(){variablesArray
