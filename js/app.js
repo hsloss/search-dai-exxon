@@ -6,7 +6,7 @@ let input = document.getElementById('search')
 let paragraph = document.getElementById('definition')
 
 let variablesArray = []
-let selectedCountry = []
+let selectedVariable = []
 let typed = input.value.toLocaleLowerCase()
 
 let Variables = function(name, value, definition){
@@ -35,7 +35,10 @@ let clickHandler = function(){variablesArray
 
   for(let i = 0; i < variablesArray.length; i++){
     if(input.value === variablesArray[i].variablesName){
-      selectedCountry.push(variablesArray[i])
+      selectedVariable.push(variablesArray[i])
+      let ehead = document.createElement('h2')
+      paragraph.appendChild(ehead)
+      ehead.innerText = variablesArray[i].variablesName
 
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
@@ -63,7 +66,7 @@ let clickHandler = function(){variablesArray
       }
     }
   }
-  selectedCountry = []
+  selectedVariable = []
 }
 
 let displayFunc = function(){
