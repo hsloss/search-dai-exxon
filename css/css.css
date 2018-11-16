@@ -61,6 +61,7 @@ h2{
   text-align: center;
 	font-size: 2em;
 	font-family: 'PT Serif', serif;
+	text-transform: capitalize;   
 }
 
 h3{
