@@ -38,8 +38,9 @@ let clickHandler = function(){variablesArray
       selectedVariable.push(variablesArray[i])
       let ehead = document.createElement('h2')
       paragraph.appendChild(ehead)
-      ehead.innerText = variablesArray[i].variablesName
-
+      let str = variablesArray[i].variablesName
+      let res = str.replace(/_/g, ' ')
+      ehead.innerText = res
       let definition = document.createElement('p')
       paragraph.appendChild(definition)
       if(variablesArray[i].variablesDefinition === ''){
