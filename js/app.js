@@ -36,24 +36,35 @@ countriesArray.push(Ethiopia, Egypt, Comoros, Nigeria, Botswana, CongoDRC, South
 // Adding Option tag
 let selectElement= document.getElementById('selectcountry')
 let selectOption = function(){
-selectElement.innerHTML =""
-for(let i =0; i<countriesArray.length; i++){
-  let opt = countriesArray[i].countryName
-  selectElement.innerHTML+="<option value=\"" + opt +"\">"+ opt + "</option>"
-}
+  selectElement.innerHTML =""
+  for(let i =0; i<countriesArray.length; i++){
+    let opt = countriesArray[i].countryName
+    selectElement.innerHTML+="<option value=\"" + opt +"\">"+ opt + "</option>"
+  }
 }
 selectOption()
 
 // linking the definition with select 
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function()
+{
   document.querySelector('select[name="select-country"]').onchange=changeEventHandler
 },true)
 
 function changeEventHandler(event){
+  let defArr=[]
   for(let i=0; i<countriesArray.length; i++){
-    if(!this)alert('please select one')
-    else alert(countriesArray[i].country_description)  
+    let DefArr = document.createElement('description')
+    if(Option.value === countriesArray[i].countryName){
+    defArr.push[countriesArray[i].countryName]
+    console.log([countriesArray[i].countryName])
+    let str = document.createElement('h3')
+    DefArr.appendChild(str)
+    str.innerText = defArr[0].country_description
+    console.log(defArr[0].country_description)
+    }
+    
+    // else alert(countriesArray[i].country_description)  
   }
   //countriesArray=[] 
 }
