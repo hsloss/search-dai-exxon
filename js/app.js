@@ -69,8 +69,22 @@ function changeEventHandler(event){
   //countriesArray=[] 
 }
 
+let btn=document.querySelector('button')
+
+btn.onclick=function(){
+removeRandom()  
+let ww= Math.random()
+let xx = document.createElement('description')
+description.appendChild(xx)
+xx.innerHTML=ww
+}
 
 
+let removeRandom = function(){
+  while(description.hasChildNodes()){
+    description.removeChild(description.firstChild)
+  }
+}
 
 // // Adding definition popup 
 // let eldescription = document.getElementById('description')
