@@ -15,11 +15,6 @@ let Variables = function(name, value, definition){
   this.variablesDefinition = definition
 }
 
-// let MaxOpenLocalContent = new Variables('max_open_local_content', '40', 'max value possible for local content if all awardi… and expat labor from skills percentages/salaires')
-// let TotalLocalContent = new Variables('total_local_content', '70', 'prime_local_content + locally_awarded_local_content')
-
-// variablesArray.push(MaxOpenLocalContent, TotalLocalContent)
-
 $.getJSON('https://raw.githubusercontent.com/hsloss/search-countries/newNamesForVariables/JSON/lcomvars.json', response => {
   response.data.forEach((val) => {
     let newVar = new Variables(val.name, val.sample_val, val.primary_definition)
@@ -76,6 +71,21 @@ let displayFunc = function(){
   })
   return displayResults
 }
+
+//*If you want to search and filter by keyword, you can use the code below (lines 76-88)*
+// //et displaySeeAlso = function (){
+//   elForm.addEventListener('change', function(event) {
+//     event.preventDefault()
+//     removeSeeAlso()
+//     for(let i = 0; i < countriesArray.length; i++){
+//       let j=0
+//       if (countriesArray[i].countryRegion === selectedCountry[j].countryRegion|| countriesArray[i].countryLanguage === selectedCountry[j].countryLanguage) {
+//         let elRow = document.createElement('li')
+//         elTable.appendChild(elRow)
+//         elRow.innerText = countriesArray[i].countryName
+//         console.log(countriesArray[i].countryName)
+//       }
+//     }
 
 let populateForm = function() {
   elForm.appendChild(selectElement)
