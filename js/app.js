@@ -15,6 +15,7 @@ let Variables = function(name, value, definition){
   this.variablesDefinition = definition
 }
 
+//Lines 18-23 pull data from JSON file and pushes it into a new array 'Variables'//
 $.getJSON('https://raw.githubusercontent.com/hsloss/search-countries/newNamesForVariables/JSON/lcomvars.json', response => {
   response.data.forEach((val) => {
     let newVar = new Variables(val.name, val.sample_val, val.primary_definition)
@@ -25,9 +26,10 @@ $.getJSON('https://raw.githubusercontent.com/hsloss/search-countries/newNamesFor
   populateForm()
 })
 
+//on each click, a definition and a see also list is displayed for the selected variable
 let clickHandler = function(){variablesArray
   removeDefinition()
-
+  //lines 33-49 populates the selected variable's definition
   for(let i = 0; i < variablesArray.length; i++){
     if(input.value === variablesArray[i].variablesName){
       selectedVariable.push(variablesArray[i])
@@ -46,10 +48,9 @@ let clickHandler = function(){variablesArray
     }
   }
   removeSeeAlso()
-
+  //lines 52-65 displays the selected variable's see also list.
   for(let i = 0; i < variablesArray.length; i++){
     let variablesNameString = variablesArray[i].variablesName.split('_')
-
     let inputValueSplit = input.value.split('_')
     for(let j = 0; j < inputValueSplit.length; j++) {
       if (variablesNameString.includes(inputValueSplit[j]) && inputValueSplit[j] !== 'of') {
@@ -62,9 +63,11 @@ let clickHandler = function(){variablesArray
       }
     }
   }
+  //clear the selectedVariable array so the array only has one value on each click
   selectedVariable = []
 }
 
+//displayFunc creates a filter of variables based on what is typed into the search bar//
 let displayFunc = function(){
   let displayResults = variablesArray.filter(function(test){
     return test.variablesName === typed
@@ -87,6 +90,7 @@ let displayFunc = function(){
 //       }
 //     }
 
+//populateForm populates all variable names as options in the select dropdown of the form.//
 let populateForm = function() {
   elForm.appendChild(selectElement)
   for (let i = 0; i < variablesArray.length; i++) {
@@ -96,17 +100,21 @@ let populateForm = function() {
   }
 }
 
+//on each click, the see also list for the previously selected variable is removed.//
 let removeSeeAlso = function(){
   while (elList.hasChildNodes()) {
     elList.removeChild(elList.firstChild)
   }
 }
 
+//on each click, the definition for the previously selected variable is removed.//
 let removeDefinition = function(){
   while (paragraph.hasChildNodes()) {
     paragraph.removeChild(paragraph.firstChild)
   }
 }
+
+//on each click in the see also list, assign the value from the see also list the same also as the input variable in the search bar.//
 let clickHandlerSeeAlso = function(){
   input.value = event.target.id
   clickHandler()
